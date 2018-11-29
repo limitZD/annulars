@@ -1,2 +1,0 @@
-# Annular
-about data analysis

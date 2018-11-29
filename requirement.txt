@@ -1,7 +1,0 @@
-flask
-scrapy
-sqlalchemy
-mysqlclient
-numpy
-pandas
-matplotlib
