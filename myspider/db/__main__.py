@@ -1,4 +1,4 @@
-from annular.db.base import Base, engine
+from myspider.db.base import Base, engine
 
 #if __name__ == '__main__':
 Base.metadata.create_all(engine)

@@ -3,7 +3,7 @@ import sys
 sys.path.append('/home/shiyanlou/Annular/annular/db/base')
 import base
 '''
-from annular.db.base import Base
+from myspider.db.base import Base
 from sqlalchemy import Column, String, Integer
 
 class JobModel(Base):

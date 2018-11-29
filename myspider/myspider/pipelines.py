@@ -5,8 +5,8 @@ import re
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from annular.db import JobModel
-from annular.db import Session
+from myspider.db import JobModel
+from myspider.db import Session
 
 class MyspiderPipeline(object):
     def process_item(self, item, spider):
