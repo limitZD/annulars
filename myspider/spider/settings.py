@@ -9,14 +9,14 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'myspider'
+BOT_NAME = 'spider'
 
-SPIDER_MODULES = ['myspider.spiders']
-NEWSPIDER_MODULE = 'myspider.spiders'
+SPIDER_MODULES = ['myspider.spider.spiders']
+NEWSPIDER_MODULE = 'myspider.spider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'myspider (+http://www.yourdomain.com)'
+#USER_AGENT = 'spider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -65,7 +65,7 @@ DOWNLOAD_DELAY = 30
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'myspider.pipelines.MyspiderPipeline': 300,
+    'myspider.spider.pipelines.MyspiderPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

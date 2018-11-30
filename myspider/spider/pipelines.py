@@ -5,8 +5,7 @@ import re
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from myspider.db import JobModel
-from myspider.db import Session
+from myspider.db import JobModel, Session
 
 class MyspiderPipeline(object):
     def process_item(self, item, spider):
@@ -19,8 +18,8 @@ class MyspiderPipeline(object):
             try:
                 exp_lower = int(m.group(1))
                 exp_upper = int(m.group(2))
-            except :
-                exp_lower = exp_upper = int.(m.group(1))
+            except AttributeError:
+                exp_lower = exp_upper = int(m.group(1))
 
         tags = ''.join(item['tags'])
         jobs = JobModel(
