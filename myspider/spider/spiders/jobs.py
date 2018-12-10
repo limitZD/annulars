@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from spider.items import JobItem
+from myspider.spider.items import JobItem
 
 class JobsSpider(scrapy.Spider):
     name = 'jobs'
@@ -17,23 +17,26 @@ class JobsSpider(scrapy.Spider):
         'Upgrade-Insecure-Requests': 1,
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36',
             }
+
     def start_requests(self):
-        urls=('https://www.lagou.com/zhaopin/{}/'.format(i) for i in range(1,31))
+        urls = ('https://www.lagou.com/zhaopin/{}/'.format(i) for i in range(1, 3))
         for url in urls:
+            print(url)
             yield scrapy.Request(url=url,callback=self.parse,headers=self.headers)
 
-    def parse(self,response):
+    def parse(self, response):
         for job in response.xpath('//div[contains(@id,"s_position_list")]/ul/li'):
             salary = job.xpath('.//div[@class="p_bot"]/div[@class="li_b_l"]/span/text()').extract_first().split('-')
             ed_exp = job.xpath('.//div[@class="list_item_top"]/div/div[@class="p_bot"]/div[@class="li_b_l"]/text()').re(r'(.+)\s*/\s*(.+)')
             item = JobItem({
-                'title' : job.xpath('.//div[@class="position"]/div/a/h3/text()').extract_first(),
-                'city' : job.xpath('.//div[@class="position"]/div/a/span/em/text()').extract_first(),
-                'salary_lower' : salary[0],
-                'salary_upper' : salary[1],
-                'education' : ed_exp[1],
-                'experience' : ed_exp[0],
-                'item.tags' : job.xpath('.//div[@class="list_item_bot"]/div[@class="li_b_l"]/span/text()').extract(),
-                'company' : job.xpath('.//div[@class="company"]/div[@class="company_name"]/a/text()').extract_first(),
+                'title': job.xpath('.//div[@class="position"]/div/a/h3/text()').extract_first(),
+                'city': job.xpath('.//div[@class="position"]/div/a/span/em/text()').extract_first(),
+                'salary_lower': salary[0],
+                'salary_upper': salary[1],
+                'education': ed_exp[1],
+                'experience': ed_exp[0],
+                'tags': job.xpath('.//div[@class="list_item_bot"]/div[@class="li_b_l"]/span/text()').extract(),
+                'company': job.xpath('.//div[@class="company"]/div[@class="company_name"]/a/text()').extract_first(),
                 })
             yield item
+

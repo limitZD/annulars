@@ -16,3 +16,4 @@ class JobItem(scrapy.Item):
     experience = scrapy.Field()
     education = scrapy.Field()
     tags = scrapy.Field()
+    company = scrapy.Field()
